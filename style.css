@@ -2,4 +2,107 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: var(--font-color-bold);
+    font-family: 'Josefin Sans', sans-serif;
+    outline: none;
+}
+
+:root{
+    --primary-color: hsl(220, 98%, 61%);
+    --background-gradient: linear-gradient(to bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    --bg-color: hsl(235, 21%, 11%);
+    --bg-div-color: hsl(235, 24%, 19%);
+    --font-color: hsl(234, 39%, 85%);
+    --font-color-bold: hsl(236, 33%, 92%);
+    --Purple-600: hsl(235, 16%, 43%);
+    --Purple-700: hsl(233, 14%, 35%);
+    --Purple-800: hsl(237, 14%, 26%);
+    --completed: hsl(236, 9%, 61%);
+}
+
+body.light{
+    --bg-div-color: hsl(0, 0%, 98%)
+    --completed: hsl(234, 39%, 85%)
+    --bg-color: hsl(233, 11%, 84%)
+    --font-color: hsl(236, 9%, 61%)
+    --font-color-bold: hsl(235, 19%, 35%)
+}
+
+body{
+    background: var(--bg-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    img{
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+}
+
+.container{
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    h1{
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        font-size: 40px;
+    }
+
+    button{
+        background: none;
+        border: none;
+        cursor: pointer;
+        width: 30px;
+    }
+
+    img{
+        width: 100%;
+        position: relative;
+        }
+}
+
+.new-task{
+    background: var(--bg-div-color);
+    min-width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    position: absolute;
+    margin-bottom: 1rem;
+}
+
+.add-task{
+    font-size: 2rem;
+    color: var(--font-color-bold);
+    background: var(--bg-div-color);
+    border: none;
+    position: relative;
+    left: 45%;
+    bottom: 0.45rem;
+    cursor: pointer;
+    width: 2rem;
+}
+
+.content-new-task{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
 }
