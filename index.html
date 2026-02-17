@@ -11,7 +11,11 @@
     <title>Lista Personalizavel</title>
 </head>
 <body>
-    <img class="bg" src="./images/bg-desktop-dark.jpg" alt="">
+    <!-- <img class="bg" src="./images/bg-desktop-dark.jpg" alt=""> -->
+    <picture>
+        <source class="bg-desktop" media="(min-width: 900px)" srcset="./images/bg-desktop-dark.jpg">
+        <img class="bg" src="./images/bg-mobile-dark.jpg" alt="imagem de fundo da lista">
+    </picture>
     <main class="container">
         <div class="top">
             <div class="content-top">
@@ -26,7 +30,20 @@
 
 
         <div class="todo-list">
-            
+            <div class="task">
+                <button class="finished"></button>
+                <p class="task-name">alimentar a patroa</p>
+                <button class="delete">
+                    <img src="./images/icon-cross.svg">
+                </button>
+            </div>
+            <div class="task">
+                <button class="finished"></button>
+                <p class="task-name">alimentar a patroa</p>
+                <button class="delete">
+                    <img src="./images/icon-cross.svg">
+                </button>
+            </div>
         </div>
 
 

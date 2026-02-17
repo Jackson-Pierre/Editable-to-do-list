@@ -16,7 +16,7 @@
     --font-color-bold: hsl(236, 33%, 92%);
     --Purple-600: hsl(235, 16%, 43%);
     --Purple-700: hsl(233, 14%, 35%);
-    --Purple-800: hsl(237, 14%, 26%);
+    --traco: hsl(237, 14%, 26%);
     --completed: hsl(236, 9%, 61%);
 }
 
@@ -26,6 +26,7 @@ body.white-theme{
     --bg-color: hsl(233, 11%, 84%);
     --font-color: hsl(236, 9%, 61%);
     --font-color-bold: hsl(235, 19%, 35%);
+    --traco: hsl(236, 11%, 73%);
 }
 
 body{
@@ -47,6 +48,8 @@ body{
 .container{
     width: 90%;
     max-width: 500px;
+    height: 100%;
+    padding: 8rem 0 0 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -106,4 +109,73 @@ body{
     justify-content: center;
     position: relative;
     width: 100%;
+}
+
+.task{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4rem 1rem;
+    min-height: 3.5rem;
+    border-radius: 6px;
+    margin-bottom: -0.35rem;
+    align-items: center;
+    background-color: var(--bg-div-color);
+    cursor: pointer;
+    position: relative;
+
+    .finished{
+        background: none;
+        border-radius: 50%;
+        border: 2px solid var(--traco);
+        background: none;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .task-name{
+        color: var(--font-color-bold);
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+    }
+
+    .delete{
+        cursor: pointer;
+        background: none;
+        z-index: 1;
+        border: none;
+
+        img{
+            width: 100%;
+            position: relative;
+            opacity: 0;
+            transition: all 0.2s ease-in-out;
+        }
+    }
+}
+
+.task:hover {
+    .finished{
+        border: 2px solid transparent;
+        background:
+        linear-gradient(var(--bg-div-color), var(--bg-div-color)) padding-box,
+        var(--background-gradient) border-box;
+    }
+
+    .delete img{
+        opacity: 1;
+}
+}
+
+.task::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 1px;
+    background-color: var(--traco);
 }
