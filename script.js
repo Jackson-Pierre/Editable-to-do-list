@@ -6,6 +6,8 @@ const addTaskButton = document.querySelector(".add-task");
 const newTaskInput = document.querySelector(".new-task");
 const todoList = document.querySelector(".todo-list");
 
+const quantityOfItems = document.querySelector(".quantity-of-items");
+
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function changeTheme(){
@@ -29,10 +31,17 @@ function toggleTask(index){
 function renderTasks(){
     todoList.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    if(tasks.length === 0){
+        todoList.innerHTML = `
+            <div class="no-task">
+                <p>Você ainda não tem tarefas</p>
+            </div>
+        `;
+    }else{
+        tasks.forEach((task, index) => {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task");
-
+        
         taskElement.innerHTML = `
             <button class="finished ${task.completed ? "checked" : ""}">
                 <img src="./images/icon-check.svg">
@@ -46,13 +55,21 @@ function renderTasks(){
         `;
 
         const finishedButton = taskElement.querySelector(".finished");
+        const deleteButton = taskElement.querySelector(".delete");
 
         finishedButton.addEventListener("click", () => {
             toggleTask(index);
         });
 
+        deleteButton.addEventListener("click", () => {
+            tasks.splice(index, 1);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+            renderTasks();
+        });
+
         todoList.appendChild(taskElement);
     });
+    }
 }
 
 function addTaskFunction(){
