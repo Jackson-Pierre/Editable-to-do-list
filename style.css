@@ -157,6 +157,7 @@ body{
     background-color: var(--bg-div-color);
     cursor: pointer;
     position: relative;
+    padding: 0.2rem 0;
 
     .finished{
         background: transparent;
