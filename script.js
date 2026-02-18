@@ -8,6 +8,12 @@ const todoList = document.querySelector(".todo-list");
 
 const quantityOfItems = document.querySelector(".quantity-of-items");
 const clearCompleted = document.querySelector(".clear-completed");
+const filterButtons = document.querySelectorAll(".filter-button");
+const all = document.querySelector(".all");
+const active = document.querySelector(".Active");
+const completed = document.querySelector(".completed");
+
+let currentFilter = "all";
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -32,35 +38,49 @@ function toggleTask(index){
 function renderTasks(){
     todoList.innerHTML = "";
 
-    if(tasks.length === 0){
+    let filteredTasks;
+
+    if(currentFilter === "active"){
+        filteredTasks = tasks.filter(task => !task.completed);
+    }
+    else if(currentFilter === "completed"){
+        filteredTasks = tasks.filter(task => task.completed);
+    }
+    else{
+        filteredTasks = tasks;
+    }
+
+    if(filteredTasks.length === 0){
         todoList.innerHTML = `
             <div class="no-task">
-                <p>Você ainda não tem tarefas</p>
+                <p>Nenhuma tarefa encontrada</p>
             </div>
         `;
+    }
 
-        quantityOfItems.innerHTML = `
-        <p class="quantity-of-items">0 Itens Criados</p>
-        `;
-    }else{
-        tasks.forEach((task, index) => {
+    quantityOfItems.innerHTML = `
+        <p>${tasks.length} Itens Criados</p>
+    `;
+
+    filteredTasks.forEach((task) => {
+
+        const index = tasks.findIndex(t => t.id === task.id);
+
         const taskElement = document.createElement("div");
         taskElement.classList.add("task");
-        
+
         taskElement.innerHTML = `
             <button class="finished ${task.completed ? "checked" : ""}">
                 <img src="./images/icon-check.svg">
             </button>
+
             <p class="task-name ${task.completed ? "task-checked" : ""}">
                 ${task.text}
             </p>
+
             <button class="delete">
                 <img src="./images/icon-cross.svg">
             </button>
-        `;
-
-        quantityOfItems.innerHTML = `
-        <p class="quantity-of-items">${tasks.length} Itens Criados</p>
         `;
 
         const finishedButton = taskElement.querySelector(".finished");
@@ -78,6 +98,24 @@ function renderTasks(){
 
         todoList.appendChild(taskElement);
     });
+
+    updateActiveFilterButton();
+}
+
+
+function updateActiveFilterButton(){
+    all.classList.remove("active");
+    active.classList.remove("active");
+    completed.classList.remove("active");
+
+    if(currentFilter === "all"){
+        all.classList.add("active");
+    }
+    else if(currentFilter === "active"){
+        active.classList.add("active");
+    }
+    else if(currentFilter === "completed"){
+        completed.classList.add("active");
     }
 }
 
@@ -102,10 +140,33 @@ function deleteReady(){
     renderTasks();
 }
 
+function completedFilter(){
+    currentFilter = "completed";
+    renderTasks();
+}
+
+function activeFilter(){
+    currentFilter = "active";
+    renderTasks();
+}
+
+function allFilter(){
+    currentFilter = "all";
+    renderTasks();
+}
+
 Theme.addEventListener("click", changeTheme);
 
 addTaskButton.addEventListener("click", addTaskFunction);
 
 clearCompleted.addEventListener("click", deleteReady)
+
+all.addEventListener("click", renderTasks(all));
+
+all.addEventListener("click", allFilter);
+
+active.addEventListener("click", activeFilter);
+
+completed.addEventListener("click", completedFilter)
 
 renderTasks();
