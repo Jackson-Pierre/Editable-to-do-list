@@ -7,6 +7,7 @@ const newTaskInput = document.querySelector(".new-task");
 const todoList = document.querySelector(".todo-list");
 
 const quantityOfItems = document.querySelector(".quantity-of-items");
+const clearCompleted = document.querySelector(".clear-completed");
 
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
@@ -37,6 +38,10 @@ function renderTasks(){
                 <p>Você ainda não tem tarefas</p>
             </div>
         `;
+
+        quantityOfItems.innerHTML = `
+        <p class="quantity-of-items">0 Itens Criados</p>
+        `;
     }else{
         tasks.forEach((task, index) => {
         const taskElement = document.createElement("div");
@@ -52,6 +57,10 @@ function renderTasks(){
             <button class="delete">
                 <img src="./images/icon-cross.svg">
             </button>
+        `;
+
+        quantityOfItems.innerHTML = `
+        <p class="quantity-of-items">${tasks.length} Itens Criados</p>
         `;
 
         const finishedButton = taskElement.querySelector(".finished");
@@ -87,8 +96,16 @@ function addTaskFunction(){
     renderTasks();
 }
 
+function deleteReady(){
+    tasks = tasks.filter(task => !task.completed);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    renderTasks();
+}
+
 Theme.addEventListener("click", changeTheme);
 
 addTaskButton.addEventListener("click", addTaskFunction);
+
+clearCompleted.addEventListener("click", deleteReady)
 
 renderTasks();

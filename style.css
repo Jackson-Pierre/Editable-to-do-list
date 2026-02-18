@@ -12,10 +12,8 @@
     --background-gradient: linear-gradient(to bottom, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
     --bg-color: hsl(235, 21%, 11%);
     --bg-div-color: hsl(235, 24%, 19%);
-    --font-color: hsl(234, 39%, 85%);
+    --font-color: hsla(234, 39%, 85%, 0.6);
     --font-color-bold: hsl(236, 33%, 92%);
-    --Purple-600: hsl(235, 16%, 43%);
-    --Purple-700: hsl(233, 14%, 35%);
     --traco: hsl(237, 14%, 26%);
     --completed: hsl(236, 9%, 61%);
 }
@@ -24,7 +22,7 @@ body.white-theme{
     --bg-div-color: hsl(0, 0%, 98%);
     --completed: hsl(234, 39%, 85%);
     --bg-color: hsl(233, 11%, 84%);
-    --font-color: hsl(236, 9%, 61%);
+    --font-color: hsla(237, 9%, 61%, 0.6);
     --font-color-bold: hsl(235, 19%, 35%);
     --traco: hsl(236, 11%, 73%);
 }
@@ -237,4 +235,39 @@ body{
     width: 100%;
     height: 1px;
     background-color: var(--traco);
+}
+
+.filter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-div-color);
+    border-radius: 0 0 5px 5px;
+    padding: 1rem;
+    margin-top: -0.8rem;
+    cursor: pointer;
+
+    button{
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--font-color);
+        transition: all 0.2s ease-in-out;
+
+        &:hover{
+            color: var(--font-color-bold);
+        }
+    }
+}
+
+.quantity-of-items{
+    color: var(--font-color);
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 0.03rem;
+}
+
+.filter-buttons{
+    display: flex;
+    gap: 0.6rem;
 }
