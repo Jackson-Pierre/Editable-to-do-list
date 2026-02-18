@@ -88,7 +88,6 @@ body{
     border-radius: 5px;
     position: absolute;
     margin-bottom: 1rem;
-    box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
 }
 
 .add-task{
@@ -130,8 +129,6 @@ body{
     background-color: var(--bg-div-color);
     cursor: default;
     position: relative;
-    box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
-
     p{
         opacity: 0.5;
     }
@@ -160,7 +157,6 @@ body{
     background-color: var(--bg-div-color);
     cursor: pointer;
     position: relative;
-    box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
 
     .finished{
         background: transparent;
@@ -254,7 +250,7 @@ body{
     background-color: var(--traco);
 }
 
-.filter{
+.filter, .filter-buttons-mobile{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -264,7 +260,6 @@ body{
     margin-top: -0.7rem;
     cursor: pointer;
     z-index: 1;
-    box-shadow: 5px 5px 20px -5px rgba(0,0,0,0.75);
 
     button{
         background: none;
@@ -280,7 +275,7 @@ body{
 }
 
 .quantity-of-items{
-    color: var(--font-color);
+    color: var(--font-color) !important;
     font-size: 0.6rem;
     font-weight: 500;
     letter-spacing: 0.03rem;
@@ -298,6 +293,27 @@ body{
     letter-spacing: 0.03rem;
 }
 
-@media(max-width: 480px){
-    .todo-list{}
+.filter-buttons-mobile{
+    border-radius: 5px;
+    margin-top: 0.4rem;
+    display: none;
+}
+
+@media (max-width: 550px){
+    .task-name{
+        font-size: 0.8rem !important;
+    }
+
+    .delete-img{
+        opacity: 1 !important;
+    }
+
+    .filter-buttons{
+        display: none;
+    }
+
+    .filter-buttons-mobile{
+        display: flex;
+    }
+
 }

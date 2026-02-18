@@ -8,10 +8,10 @@ const todoList = document.querySelector(".todo-list");
 
 const quantityOfItems = document.querySelector(".quantity-of-items");
 const clearCompleted = document.querySelector(".clear-completed");
-const filterButtons = document.querySelectorAll(".filter-button");
-const all = document.querySelector(".all");
-const active = document.querySelector(".Active");
-const completed = document.querySelector(".completed");
+
+const all = document.querySelectorAll(".all");
+const active = document.querySelectorAll(".Active");
+const completed = document.querySelectorAll(".completed");
 
 let currentFilter = "all";
 
@@ -73,13 +73,11 @@ function renderTasks(){
             <button class="finished ${task.completed ? "checked" : ""}">
                 <img src="./images/icon-check.svg">
             </button>
-
             <p class="task-name ${task.completed ? "task-checked" : ""}">
                 ${task.text}
             </p>
-
             <button class="delete">
-                <img src="./images/icon-cross.svg">
+                <img class="delete-img" src="./images/icon-cross.svg">
             </button>
         `;
 
@@ -102,20 +100,20 @@ function renderTasks(){
     updateActiveFilterButton();
 }
 
-
 function updateActiveFilterButton(){
-    all.classList.remove("active");
-    active.classList.remove("active");
-    completed.classList.remove("active");
+
+    all.forEach(btn => btn.classList.remove("active"));
+    active.forEach(btn => btn.classList.remove("active"));
+    completed.forEach(btn => btn.classList.remove("active"));
 
     if(currentFilter === "all"){
-        all.classList.add("active");
+        all.forEach(btn => btn.classList.add("active"));
     }
     else if(currentFilter === "active"){
-        active.classList.add("active");
+        active.forEach(btn => btn.classList.add("active"));
     }
     else if(currentFilter === "completed"){
-        completed.classList.add("active");
+        completed.forEach(btn => btn.classList.add("active"));
     }
 }
 
@@ -123,14 +121,18 @@ function addTaskFunction(){
     const text = newTaskInput.value.trim();
 
     if(text === "") return;
+
     const task = {
         id: Date.now(),
         text: text,
         completed: false
     };
+
     tasks.push(task);
     localStorage.setItem("tasks", JSON.stringify(tasks));
+
     newTaskInput.value = "";
+
     renderTasks();
 }
 
@@ -159,14 +161,18 @@ Theme.addEventListener("click", changeTheme);
 
 addTaskButton.addEventListener("click", addTaskFunction);
 
-clearCompleted.addEventListener("click", deleteReady)
+clearCompleted.addEventListener("click", deleteReady);
 
-all.addEventListener("click", renderTasks(all));
+all.forEach(button => {
+    button.addEventListener("click", allFilter);
+});
 
-all.addEventListener("click", allFilter);
+active.forEach(button => {
+    button.addEventListener("click", activeFilter);
+});
 
-active.addEventListener("click", activeFilter);
-
-completed.addEventListener("click", completedFilter)
+completed.forEach(button => {
+    button.addEventListener("click", completedFilter);
+});
 
 renderTasks();
